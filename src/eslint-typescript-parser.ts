@@ -22,14 +22,14 @@ export function parseForESLint(
   options?: ParserOptions,
 ): any {
   const src = typeof code === 'string' ? code : code.text
+  const isJSX = !!options?.ecmaFeatures?.jsx
   const ast = replace(
     src,
-    options?.filePath || 'example.js',
+    true,
+    isJSX,
     'eslint-typescript-parser',
     (src, isExpression) => {
-      const ast = _parseForESLint(isExpression ? `(${src})` : src, {
-        ...options,
-      })
+      const ast = _parseForESLint(isExpression ? `(${src})` : src, options)
 
       if (isExpression) {
         // @ts-expect-error
@@ -38,6 +38,13 @@ export function parseForESLint(
 
       return ast
     },
+    (start, end, expression) => ({
+      type: 'TryExpression',
+      expression,
+      start,
+      end,
+      range: [start, end],
+    }),
   )
 
   return ast

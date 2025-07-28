@@ -69,21 +69,24 @@ const babelOptions: ParserOptions = {
 
 const babelParser: Parser = {
   ...babel.babel,
-  parse(text, { filepath }) {
-    return babelParse(text, filepath, babelOptions)
+  parse(text) {
+    return babelParse(text, babelOptions)
   },
 }
 const babelTsParser: Parser = {
   ...babel['babel-ts'],
-  parse(text, { filepath }) {
-    return babelParse(text, filepath, babelOptions)
+  parse(text) {
+    return babelParse(text, {
+      ...babelOptions,
+      plugins: [...(babelOptions.plugins || []), 'typescript'],
+    })
   },
 }
 
 const typescriptParser: Parser = {
   ...typescript.typescript,
   parse(text, { filepath }) {
-    return eslintTsParse(text, filepath, {
+    return eslintTsParse(text, {
       sourceType: 'module',
       loc: true,
       range: true,

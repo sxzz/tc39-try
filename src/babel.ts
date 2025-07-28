@@ -7,34 +7,32 @@ import {
 import { replace } from './replace'
 import type { File } from '@babel/types'
 
-export function parse(
-  src: string,
-  filename: string = 'example.js',
-  options?: ParserOptions,
-): ParseResult<File> {
+export function parse(src: string, options?: ParserOptions): ParseResult<File> {
+  const isTS = !!options?.plugins?.some(
+    (plugin) => plugin === 'typescript' || plugin[0] === 'typescript',
+  )
+  const isJSX = !!options?.plugins?.some(
+    (plugin) => plugin === 'jsx' || plugin[0] === 'jsx',
+  )
+
   return replace(
     src,
-    filename,
+    isTS,
+    isJSX,
     'babel',
-    (src, isExpression, isTS, isJSX) => {
-      const plugins = [
-        ...(isTS ? (['typescript'] as const) : []),
-        ...(isJSX ? (['jsx'] as const) : []),
-      ]
+    (src, isExpression) => {
       return (isExpression ? parseExpression : babelParse)(src, {
-        sourceType: 'module',
-        plugins,
         allowYieldOutsideFunction: true,
+        allowAwaitOutsideFunction: true,
         ...options,
       })
     },
-    (start, end, expression) => {
-      return {
-        type: 'TryExpression',
-        expression,
-        start,
-        end,
-      }
-    },
+    (start, end, expression) => ({
+      type: 'TryExpression',
+      expression,
+      start,
+      end,
+      range: [start, end],
+    }),
   )
 }

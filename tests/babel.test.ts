@@ -1,12 +1,9 @@
-import { Parser } from 'acorn'
 import { expect, test } from 'vitest'
-import { tryExpressionPlugin } from '../src/acorn'
-
-const TryParser = Parser.extend(tryExpressionPlugin())
+import { parse } from '../src/babel'
 
 test('parse simple try expression', () => {
   const code = 'const a = try something()'
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const declaration = (ast as any).body[0].declarations[0]
   expect(declaration.init.type).toBe('TryExpression')
@@ -16,7 +13,7 @@ test('parse simple try expression', () => {
 
 test('parse try expression in array destructuring', () => {
   const code = 'const [[ok, err, val]] = [try something()]'
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const declaration = (ast as any).body[0].declarations[0]
   const arrayExpression = declaration.init.elements[0]
@@ -26,7 +23,7 @@ test('parse try expression in array destructuring', () => {
 
 test('parse try expression in array literal', () => {
   const code = 'const [ok, err, val] = try something()'
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const declaration = (ast as any).body[0].declarations[0]
   expect(declaration.init.type).toBe('TryExpression')
@@ -35,7 +32,7 @@ test('parse try expression in array literal', () => {
 
 test('parse try expression in arrow function', () => {
   const code = 'array.map(fn => try fn())'
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const callExpression = (ast as any).body[0].expression
   const arrowFunction = callExpression.arguments[0]
@@ -49,7 +46,7 @@ test('parse try with yield', () => {
       return yield try something()
     }
   `
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const functionDecl = (ast as any).body[0]
   const returnStatement = functionDecl.body.body[0]
@@ -64,7 +61,7 @@ test('parse try yield', () => {
       try yield something()
     }
   `
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const functionDecl = (ast as any).body[0]
   const expressionStatement = functionDecl.body.body[0]
@@ -78,7 +75,7 @@ test('parse try await', () => {
       try await something()
     }
   `
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const functionDecl = (ast as any).body[0]
   const expressionStatement = functionDecl.body.body[0]
@@ -88,7 +85,7 @@ test('parse try await', () => {
 
 test('parse try with instanceof', () => {
   const code = 'try (a instanceof b)'
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const expressionStatement = (ast as any).body[0]
   expect(expressionStatement.expression.type).toBe('TryExpression')
@@ -100,7 +97,7 @@ test('parse try with instanceof', () => {
 
 test('parse nested try expressions', () => {
   const code = 'const a = try (try (try (try (try 1))))'
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const declaration = (ast as any).body[0].declarations[0]
 
@@ -109,13 +106,13 @@ test('parse nested try expressions', () => {
     expect(current.type).toBe('TryExpression')
     current = current.expression
   }
-  expect(current.type).toBe('Literal')
+  expect(current.type).toBe('NumericLiteral')
   expect(current.value).toBe(1)
 })
 
 test('parse parenthesized try expression with instanceof', () => {
   const code = '(try a) instanceof Result'
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const expressionStatement = (ast as any).body[0]
   expect(expressionStatement.expression.type).toBe('BinaryExpression')
@@ -134,7 +131,7 @@ test('parse traditional try catch blocks', () => {
       }
     }
   `
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const functionDecl = (ast as any).body[0]
   const tryStatement = functionDecl.body.body[0]
@@ -156,7 +153,7 @@ test('parse try catch finally blocks', () => {
       }
     }
   `
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const functionDecl = (ast as any).body[0]
   const tryStatement = functionDecl.body.body[0]
@@ -176,7 +173,7 @@ test('parse try finally without catch', () => {
       }
     }
   `
-  const ast = TryParser.parse(code, { ecmaVersion: 'latest' })
+  const ast = parse(code).program
 
   const functionDecl = (ast as any).body[0]
   const tryStatement = functionDecl.body.body[0]

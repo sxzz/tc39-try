@@ -12,29 +12,18 @@ type NodeInfo = [
   end: number,
 ]
 
-type ParseFn = (
-  src: string,
-  isExpression: boolean,
-  isTS: boolean,
-  isJSX: boolean,
-) => any
+type ParseFn = (src: string, isExpression: boolean) => any
 
 type BuildFn = (start: number, end: number, expression: any) => any
 
 export function replace(
   source: string,
-  filename: string,
+  isTS: boolean,
+  isJSX: boolean,
   framework: string,
   parse: ParseFn,
   build: BuildFn,
 ): any {
-  const isTS =
-    filename.endsWith('.ts') ||
-    filename.endsWith('.tsx') ||
-    filename.endsWith('.mts') ||
-    filename.endsWith('.cts')
-  const isJSX = filename.endsWith('.jsx') || filename.endsWith('.tsx')
-
   let parser = Parser
   if (isTS) {
     // @ts-expect-error
@@ -78,7 +67,7 @@ export function replace(
 
         if (node.end - node.start < placeholder.length) {
           throw new Error(
-            `The replacement string is longer than the original expression in ${filename}`,
+            `The replacement string is longer than the original expression`,
           )
         }
 
@@ -87,12 +76,17 @@ export function replace(
     },
   })
 
-  const finalAST = parse(replacedSource, false, isTS, isJSX)
+  const finalAST = parse(replacedSource, false)
   ;(walk as any)(finalAST, {
     enter(node: any) {
+      if (['File', 'Program', 'ExpressionStatement'].includes(node.type)) {
+        return
+      }
+
       const found = sources.find(
         ([, start, end]) => node.start === start && node.end === end,
       )
+
       if (!found) return
 
       const newNode = build(
@@ -108,8 +102,7 @@ export function replace(
   return finalAST
 
   function processExpression(sources: NodeInfo[], node: NodeInfo): any {
-    const expressionStart = node[3]
-    const expressionEnd = node[4]
+    const [, , , expressionStart, expressionEnd] = node
 
     const expression = sources.find(
       ([, start, end]) => start >= expressionStart && end <= expressionEnd,
@@ -125,11 +118,11 @@ export function replace(
         throw new Error('Not supported expression structure')
       }
     } else {
-      const ast = parse(node[0], true, isTS, isJSX)
+      const ast = parse(node[0], true)
 
-      ast.range = [node[1], node[2]]
-      ast.start = node[1]
-      ast.end = node[2]
+      ast.range = [expressionStart, expressionEnd]
+      ast.start = expressionStart
+      ast.end = expressionEnd
 
       return ast
     }

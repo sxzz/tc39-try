@@ -4,25 +4,26 @@ import {
 } from '@typescript-eslint/typescript-estree'
 import { replace } from './replace'
 
-export function parse(
-  src: string,
-  filename: string,
-  options?: TSESTreeOptions,
-): any {
-  return replace(src, filename, 'eslint-typescript', (
+export function parse(src: string, options?: TSESTreeOptions): any {
+  return replace(
     src,
-    isExpression,
-    isTS,
-    isJSX,
-  ) => {
-    let ast = tsEslintParse(isExpression ? `(${src})` : src, {
-      jsx: isJSX,
-      ...options,
-    })
+    true,
+    !!options?.jsx,
+    'eslint-typescript',
+    (src, isExpression) => {
+      let ast = tsEslintParse(isExpression ? `(${src})` : src, options)
 
-    // @ts-expect-error
-    if (isExpression) ast = ast.body[0].expression
+      // @ts-expect-error
+      if (isExpression) ast = ast.body[0].expression
 
-    return ast
-  })
+      return ast
+    },
+    (start, end, expression) => ({
+      type: 'TryExpression',
+      expression,
+      start,
+      end,
+      range: [start, end],
+    }),
+  )
 }
