@@ -2,17 +2,20 @@ import {
   parseForESLint as _parseForESLint,
   type ParserOptions,
 } from '@typescript-eslint/parser'
-import { version } from '../package.json'
 import { replace } from './replace'
 import type { SourceFile } from 'typescript'
+
 export {
   clearCaches,
   createProgram,
+  meta,
+  version,
   withoutProjectParserOptions,
+  type ParserOptions,
   type ParserServices,
   type ParserServicesWithoutTypeInformation,
   type ParserServicesWithTypeInformation,
-} from '@typescript-eslint/typescript-estree'
+} from '@typescript-eslint/parser'
 
 export function parseForESLint(
   code: string | SourceFile,
@@ -39,10 +42,3 @@ export function parseForESLint(
 
   return ast
 }
-
-export const meta: { name: string; version: string } = {
-  name: 'typescript-eslint/parser',
-  version,
-}
-
-export { version, type ParserOptions }

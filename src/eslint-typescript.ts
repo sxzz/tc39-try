@@ -1,7 +1,14 @@
-import { parse as tsEslintParse } from '@typescript-eslint/typescript-estree'
+import {
+  parse as tsEslintParse,
+  type TSESTreeOptions,
+} from '@typescript-eslint/typescript-estree'
 import { replace } from './replace'
 
-export function parse(src: string, filename: string): any {
+export function parse(
+  src: string,
+  filename: string,
+  options?: TSESTreeOptions,
+): any {
   return replace(src, filename, 'eslint-typescript', (
     src,
     isExpression,
@@ -9,17 +16,8 @@ export function parse(src: string, filename: string): any {
     isJSX,
   ) => {
     let ast = tsEslintParse(isExpression ? `(${src})` : src, {
-      sourceType: 'module',
-      loc: true,
-      range: true,
-      comment: true,
-      tokens: false,
-      loggerFn: false,
-      project: false,
-      jsDocParsingMode: 'none',
-      suppressDeprecatedPropertyWarnings: true,
-      filePath: filename,
       jsx: isJSX,
+      ...options,
     })
 
     // @ts-expect-error
