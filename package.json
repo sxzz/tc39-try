@@ -19,6 +19,7 @@
     "dist"
   ],
   "exports": {
+    ".": "./dist/index.js",
     "./acorn": "./dist/acorn.js",
     "./babel": "./dist/babel.js",
     "./eslint-typescript": "./dist/eslint-typescript.js",
@@ -26,6 +27,7 @@
     "./espree": "./dist/espree.js",
     "./prettier": "./dist/prettier.js",
     "./replace": "./dist/replace.js",
+    "./unplugin": "./dist/unplugin.js",
     "./volar": "./dist/volar.js",
     "./package.json": "./package.json"
   },
@@ -57,12 +59,16 @@
     "acorn-typescript": "^1.4.13",
     "espree": "^10.4.0",
     "estree-walker": "^3.0.3",
-    "ts-macro": "^0.3.0"
+    "magic-string-ast": "^1.0.0",
+    "try": "^1.0.0-beta.9",
+    "ts-macro": "^0.3.0",
+    "unplugin": "^2.3.5"
   },
   "devDependencies": {
     "@babel/types": "^7.28.2",
     "@sxzz/eslint-config": "^7.0.6",
     "@sxzz/prettier-config": "^2.2.3",
+    "@sxzz/test-utils": "^0.5.7",
     "@ts-macro/tsc": "^0.3.0",
     "@types/espree": "^10.1.0",
     "@types/node": "^24.0.15",
@@ -75,5 +81,8 @@
   },
   "engines": {
     "node": ">=20.19.0"
-  }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts"
 }
