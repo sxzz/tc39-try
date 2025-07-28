@@ -16,6 +16,10 @@ type ParseFn = (src: string, isExpression: boolean) => any
 
 type BuildFn = (start: number, end: number, expression: any) => any
 
+function getRange(node: any) {
+  return node.range || [node.start, node.end]
+}
+
 export function replace(
   source: string,
   isTS: boolean,
@@ -28,8 +32,7 @@ export function replace(
   if (isTS) {
     // @ts-expect-error
     parser = parser.extend(tsPlugin())
-  }
-  if (isJSX) {
+  } else if (isJSX) {
     parser = parser.extend(jsx())
   }
   parser = parser.extend(tryExpressionPlugin())
@@ -82,18 +85,14 @@ export function replace(
       if (['File', 'Program', 'ExpressionStatement'].includes(node.type)) {
         return
       }
-
+      const [start, end] = getRange(node)
       const found = sources.find(
-        ([, start, end]) => node.start === start && node.end === end,
+        ([, _start, _end]) => start === _start && end === _end,
       )
 
       if (!found) return
 
-      const newNode = build(
-        node.start,
-        node.end,
-        processExpression(sources, found),
-      )
+      const newNode = build(start, end, processExpression(sources, found))
       this.replace(newNode)
       this.skip()
     },
