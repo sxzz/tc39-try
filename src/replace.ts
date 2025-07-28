@@ -44,7 +44,8 @@ export function replace(
 
   let replacedSource = source
   const sources: NodeInfo[] = []
-  ;(walk as any)(ast, {
+
+  walk(ast as any, {
     enter(node: any) {
       if (node.type === 'TryExpression') {
         if (framework === 'eslint-typescript-parser') {
@@ -80,8 +81,8 @@ export function replace(
   })
 
   const finalAST = parse(replacedSource, false)
-  ;(walk as any)(finalAST, {
-    enter(node: any) {
+  walk(finalAST as any, {
+    enter(node) {
       if (['File', 'Program', 'ExpressionStatement'].includes(node.type)) {
         return
       }

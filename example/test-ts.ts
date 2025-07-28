@@ -7,3 +7,8 @@ function fn(): number {
 
 const [ok, error, value] = try fn()
 console.info(ok, error, value)
+
+export let x = try ({ a: 10 })
+
+if (try fn()) {
+}
