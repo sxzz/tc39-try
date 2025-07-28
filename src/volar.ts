@@ -19,5 +19,4 @@ const plugin: PluginReturn<never, false> = createPlugin(({ ts }) => {
   }
 })
 
-// eslint-disable-next-line import/no-default-export
 export default plugin

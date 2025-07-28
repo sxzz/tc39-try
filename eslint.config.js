@@ -11,4 +11,9 @@ export default sxzz().append(
     files: [GLOB_JS],
     languageOptions: { parser: jsParser },
   },
+  {
+    rules: {
+      'import/no-default-export': 'off',
+    },
+  },
 )
