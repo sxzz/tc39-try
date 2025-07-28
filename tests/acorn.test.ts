@@ -1,8 +1,5 @@
-import { Parser } from 'acorn'
 import { expect, test } from 'vitest'
-import { tryExpressionPlugin } from '../src/acorn'
-
-const TryParser = Parser.extend(tryExpressionPlugin())
+import { TryParser } from '../src/acorn'
 
 test('parse simple try expression', () => {
   const code = 'const a = try something()'
