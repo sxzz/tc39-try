@@ -1,0 +1,79 @@
+{
+  "name": "tc39-try",
+  "version": "0.0.0",
+  "packageManager": "pnpm@10.13.1",
+  "description": "An Acorn plugin for parsing JavaScript try expressions",
+  "type": "module",
+  "license": "MIT",
+  "homepage": "https://github.com/sxzz/tc39-try#readme",
+  "bugs": {
+    "url": "https://github.com/sxzz/tc39-try/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sxzz/tc39-try.git"
+  },
+  "author": "Kevin Deng <sxzz@sxzz.moe>",
+  "funding": "https://github.com/sponsors/sxzz",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./acorn": "./dist/acorn.js",
+    "./babel": "./dist/babel.js",
+    "./eslint-typescript": "./dist/eslint-typescript.js",
+    "./eslint-typescript-parser": "./dist/eslint-typescript-parser.js",
+    "./espree": "./dist/espree.js",
+    "./prettier": "./dist/prettier.js",
+    "./replace": "./dist/replace.js",
+    "./volar": "./dist/volar.js",
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "lint": "eslint --cache .",
+    "lint:fix": "pnpm run lint --fix",
+    "build": "tsdown",
+    "dev": "tsdown --watch",
+    "test": "vitest",
+    "typecheck": "tsmc --noEmit",
+    "format": "prettier --cache --write .",
+    "release": "bumpp && pnpm publish",
+    "prepublishOnly": "pnpm run build"
+  },
+  "peerDependencies": {
+    "eslint": "^9.31.0",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.28.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "@typescript-eslint/typescript-estree": "^8.38.0",
+    "acorn": "^8.15.0",
+    "acorn-jsx": "^5.3.2",
+    "acorn-typescript": "^1.4.13",
+    "espree": "^10.4.0",
+    "estree-walker": "^3.0.3",
+    "ts-macro": "^0.3.0"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.28.2",
+    "@sxzz/eslint-config": "^7.0.6",
+    "@sxzz/prettier-config": "^2.2.3",
+    "@ts-macro/tsc": "^0.3.0",
+    "@types/espree": "^10.1.0",
+    "@types/node": "^24.0.15",
+    "bumpp": "^10.2.0",
+    "eslint": "^9.31.0",
+    "tsdown": "^0.12.9",
+    "tsx": "^4.20.3",
+    "typescript": "^5.8.3",
+    "vitest": "^3.2.4"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}
