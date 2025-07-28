@@ -4,4 +4,5 @@ export default defineConfig({
   entry: ['./src'],
   platform: 'neutral',
   exports: true,
+  dts: true,
 })
