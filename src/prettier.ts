@@ -113,11 +113,11 @@ const plugin: Plugin = {
       ...printers.estree,
       print(path, options, print) {
         if (path.node.type === 'TryExpression') {
-          const needParens =
-            ['BinaryExpression', 'TryExpression'].includes(
-              path.node.expression.type,
-            ) || path.node.expression.type === 'ObjectExpression'
-
+          const needParens = [
+            'BinaryExpression',
+            'TryExpression',
+            'ObjectExpression',
+          ].includes(path.node.expression.type)
           return [
             'try ',
             needParens ? '(' : '',
