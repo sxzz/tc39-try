@@ -1,20 +1,19 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`rollup > basic.ts 1`] = `
+exports[`unplugin > basic.ts 1`] = `
 "// basic.js
 import { __t } from 'tc39-try';
 
 function fn() {
-  return 10
+	return 10;
 }
 async function fn2() {
-  await 10;
-  return 42
+	await 10;
+	return 42;
 }
+const x = __t(() => fn());
+const x2 = await __t(() => fn2());
 
-// @ts-expect-error
-const x = __t(() => (fn()));
-// @ts-expect-error
-const x2 = await __t(() => (fn2()));
+export { x, x2 };
 "
 `;

@@ -11,6 +11,15 @@ test('parse simple try expression', () => {
   expect(declaration.init.expression.callee.name).toBe('something')
 })
 
+test('parse try expression with object literal', () => {
+  const code = 'const a = try ({ a: 10 })'
+  const ast = parse(code).program
+
+  const declaration = (ast as any).body[0].declarations[0]
+  expect(declaration.init.type).toBe('TryExpression')
+  expect(declaration.init.expression.type).toBe('ObjectExpression')
+})
+
 test('parse try expression in array destructuring', () => {
   const code = 'const [[ok, err, val]] = [try something()]'
   const ast = parse(code).program

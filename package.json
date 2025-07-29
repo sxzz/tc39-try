@@ -18,6 +18,9 @@
   "files": [
     "dist"
   ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "exports": {
     ".": "./dist/index.js",
     "./acorn": "./dist/acorn.js",
@@ -77,12 +80,10 @@
     "tsdown": "^0.12.9",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
+    "unplugin-oxc": "^0.4.8",
     "vitest": "^3.2.4"
   },
   "engines": {
     "node": ">=20.19.0"
-  },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts"
+  }
 }
