@@ -21,9 +21,7 @@ describe('volar', async () => {
   const createProgram = proxyCreateProgram(ts, ts.createProgram, (
     ts,
     options,
-  ) => {
-    return getLanguagePlugins(ts, options.options, { plugins: [volar()] })
-  })
+  ) => getLanguagePlugins(ts, options.options, { plugins: [volar()] }))
 
   const program = createProgram({
     options: compilerOptions,
