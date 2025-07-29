@@ -70,12 +70,6 @@ export function replace(
         const originalLength = node.end - node.start
         const placeholder = 'x'.repeat(originalLength)
 
-        if (node.end - node.start < placeholder.length) {
-          throw new Error(
-            `The replacement string is longer than the original expression`,
-          )
-        }
-
         replacedSource = `${replacedSource.slice(0, node.start)}${placeholder}${replacedSource.slice(node.end)}`
       }
     },
