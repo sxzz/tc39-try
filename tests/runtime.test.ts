@@ -16,7 +16,7 @@ test('try runtime', async () => {
   }
 
   expect(try ok()).toEqual(Result.ok(42))
-  expect(try await okAsync()).toEqual(Result.ok(42))
+  expect(try (await okAsync())).toEqual(Result.ok(42))
   await expect(try okAsync()).resolves.toEqual(Result.ok(42))
   expect(try (try ok())).toEqual(Result.ok(Result.ok(42)))
 
