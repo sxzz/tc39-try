@@ -4,7 +4,7 @@ import { walk } from 'estree-walker'
 import { createPlugin, type PluginReturn } from 'ts-macro'
 import { tryExpressionPlugin } from './acorn'
 
-const plugin: PluginReturn<never, false> = createPlugin(() => {
+const plugin: PluginReturn<undefined, false> = createPlugin(() => {
   // @ts-expect-error
   const parser = Parser.extend(tsPlugin()).extend(tryExpressionPlugin())
 
