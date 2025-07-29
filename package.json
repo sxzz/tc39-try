@@ -1,6 +1,6 @@
 {
   "name": "tc39-try",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "packageManager": "pnpm@10.13.1",
   "description": "An Acorn plugin for parsing JavaScript try expressions",
   "type": "module",
