@@ -1,13 +1,19 @@
+/// <reference types="vite/client" />
+
 import path from 'node:path'
 import { testFixtures } from '@sxzz/test-utils'
 import { getLanguagePlugins } from '@ts-macro/language-plugin'
 import { proxyCreateProgram } from '@volar/typescript'
-import fg from 'fast-glob'
 import * as ts from 'typescript'
 import { describe } from 'vitest'
 import volar from '../src/volar'
 
-const workspace = path.resolve(__dirname, './fixtures')
+const workspace = path.resolve(import.meta.dirname, './fixtures')
+const fixtures = import.meta.glob('./fixtures/*.ts', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+})
 
 describe('volar', async () => {
   const compilerOptions: ts.CompilerOptions = {}
@@ -18,10 +24,12 @@ describe('volar', async () => {
   ) => {
     return getLanguagePlugins(ts, options.options, { plugins: [volar()] })
   })
+
   const program = createProgram({
     options: compilerOptions,
     host,
-    rootNames: await fg(`${workspace}/*.ts`),
+    rootNames: Object.keys(fixtures).map((id) =>
+      path.resolve(import.meta.dirname, id)),
   })
 
   await testFixtures(
