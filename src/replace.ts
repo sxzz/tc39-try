@@ -52,8 +52,9 @@ export function replace(
           replacedSource =
             replacedSource.slice(0, node.start) +
             ' '.repeat(node.expression.start - node.start) +
-            replacedSource.slice(node.expression.start)
-
+            replacedSource.slice(node.expression.start, node.expression.end) +
+            ' '.repeat(node.end - node.expression.end) +
+            replacedSource.slice(node.end)
           return
         }
 

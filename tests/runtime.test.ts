@@ -1,6 +1,6 @@
 /* eslint-disable unicorn/no-unnecessary-await */
-import { expect, test } from 'vitest'
 import { Result } from 'try'
+import { expect, test } from 'vitest'
 
 test('try runtime', async () => {
   function ok() {
