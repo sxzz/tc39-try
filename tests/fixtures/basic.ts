@@ -1,3 +1,4 @@
+import { Result } from 'try'
 function fn() {
   return 10
 }
@@ -6,5 +7,5 @@ async function fn2() {
   return 42
 }
 
-const x = try fn()
-const x2 = try await fn2()
+export const x: Result<number> = try fn()
+export const x2: Result<number> = try await fn2()

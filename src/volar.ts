@@ -23,19 +23,31 @@ const plugin: PluginReturn<never, false> = createPlugin(() => {
         allowSuperOutsideMethod: true,
       })
 
-      let index = 0
+      let changed = false
       walk(program as any, {
-        leave(node: any) {
+        enter(node: any) {
           if (node.type === 'TryExpression') {
+            let expressionStart = node.expression.start
+
+            const isAwait = node.expression.type === 'AwaitExpression'
+            if (isAwait) {
+              expressionStart = node.expression.argument.start
+            }
+
             codes.replaceRange(
               node.start,
-              node.expression.start,
-              `({}) as ([true, never, typeof _tmp${index}] | [false, unknown, unknown])\n, _tmp${index++} = `,
+              expressionStart,
+              `${isAwait ? 'await ' : ''}__t(() => (`,
             )
-            codes.replaceRange(node.expression.end, node.end, '')
+            codes.replaceRange(node.expression.end, node.end, '))')
+            changed = true
           }
         },
       })
+
+      if (changed) {
+        codes.push(`import { __t } from 'tc39-try';\n`)
+      }
     },
   }
 })

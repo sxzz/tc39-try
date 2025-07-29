@@ -12,7 +12,9 @@ async function fn2() {
   return 42
 }
 
-const x = __t(fn());
-const x2 = await __t(fn2());
+// @ts-expect-error
+const x = __t(() => (fn()));
+// @ts-expect-error
+const x2 = await __t(() => (fn2()));
 "
 `;

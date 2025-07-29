@@ -1,19 +1,28 @@
+/* eslint-disable unicorn/no-unnecessary-await */
 import { expect, test } from 'vitest'
-import { __t } from '../src/index'
+import { Result } from 'try'
 
 test('try runtime', async () => {
-  function fn() {
-    return 10
+  function ok() {
+    return 42
   }
-  async function fn2() {
-    // eslint-disable-next-line unicorn/no-unnecessary-await
-    await 10
+  async function okAsync() {
+    await 1
     return 42
   }
 
-  const x = __t(fn())
-  const x2 = await __t(fn2())
+  function err(arg?: any) {
+    throw new Error(`test error: ${arg}`)
+  }
 
-  expect(Array.from(x)).toEqual([true, undefined, 10])
-  expect(Array.from(x2)).toEqual([true, undefined, 42])
+  expect(try ok()).toEqual(Result.ok(42))
+  expect(try await okAsync()).toEqual(Result.ok(42))
+  await expect(try okAsync()).resolves.toEqual(Result.ok(42))
+  expect(try (try ok())).toEqual(Result.ok(Result.ok(42)))
+
+  expect(Array.from(try err())).toEqual([
+    false,
+    new Error('test error: undefined'),
+    undefined,
+  ])
 })

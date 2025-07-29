@@ -9,6 +9,7 @@ import { tryExpressionPlugin } from './acorn'
 const unplugin: UnpluginInstance<{} | undefined, false> = createUnplugin(() => {
   return {
     name: 'tc39-try',
+    enforce: 'pre',
     transform: {
       filter: {
         code: 'try ',
@@ -37,19 +38,21 @@ const unplugin: UnpluginInstance<{} | undefined, false> = createUnplugin(() => {
           enter(node: any) {
             if (node.type === 'TryExpression') {
               let expressionStart = node.expression.start
+
               const isAwait = node.expression.type === 'AwaitExpression'
               if (isAwait) {
                 expressionStart = node.expression.argument.start
               }
+
               s.overwrite(
                 node.start,
                 expressionStart,
-                `${isAwait ? 'await ' : ''}__t(`,
+                `${isAwait ? 'await ' : ''}__t(() => (`,
               )
               if (node.expression.end === node.end) {
-                s.appendLeft(node.end, ')')
+                s.appendLeft(node.end, '))')
               } else {
-                s.overwrite(node.expression.end, node.end, ')')
+                s.overwrite(node.expression.end, node.end, '))')
               }
             }
           },
