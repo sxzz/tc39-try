@@ -1,0 +1,16 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`volar > basic.ts 1`] = `
+"import { t as __v_try } from 'tc39-try';
+import { Result } from 'try'
+function fn() {
+  return 10
+}
+async function fn2() {
+  await 10
+  return 42
+}
+
+export const x: Result<number> = __v_try(() => (fn()))
+export const x2: Result<number> = await __v_try(() => (fn2()))"
+`;
