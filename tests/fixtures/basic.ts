@@ -8,4 +8,4 @@ async function fn2() {
 }
 
 export const x: Result<number> = try fn()
-export const x2: Result<number> = try await fn2()
+export const x2: Result<number> = try (await fn2())

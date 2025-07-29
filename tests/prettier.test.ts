@@ -16,6 +16,7 @@ test.each(['acorn', 'babel', 'babel-ts'])(
     ;(try aa) instanceof Result
     const b = try (try (try (try (try 111))))
     const result = try ({ data: work() })
+    const x = (try fn()).ok
 
     function* gen() {
       yield try  something()
@@ -39,6 +40,7 @@ try (a instanceof b)
 ;(try aa) instanceof Result
 const b = try (try (try (try (try 111))))
 const result = try ({ data: work() })
+const x = (try fn()).ok
 
 function* gen() {
   yield try something()

@@ -116,14 +116,17 @@ const plugin: Plugin = {
           path.node.type === 'UnaryExpression' &&
           path.node.operator === 'try'
         ) {
+          const needsRootParens = path.parent.type === 'MemberExpression'
           const needParens = ['UnaryExpression', 'ObjectExpression'].includes(
             path.node.argument.type,
           )
           return [
+            needsRootParens ? '(' : '',
             'try ',
             needParens ? '(' : '',
             path.call(print, 'argument'),
             needParens ? ')' : '',
+            needsRootParens ? ')' : '',
           ]
         }
         return printers.estree.print(path, options, print)
