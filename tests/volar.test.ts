@@ -10,14 +10,7 @@ import volar from '../src/volar'
 const workspace = path.resolve(__dirname, './fixtures')
 
 describe('volar', async () => {
-  const compilerOptions: ts.CompilerOptions = {
-    rootDir: workspace,
-    outDir: workspace,
-    target: ts.ScriptTarget.ES2020,
-    module: ts.ModuleKind.ESNext,
-    allowNonTsExtensions: true,
-    skipLibCheck: true,
-  }
+  const compilerOptions: ts.CompilerOptions = {}
   const host = ts.createCompilerHost(compilerOptions)
   const createProgram = proxyCreateProgram(ts, ts.createProgram, (
     ts,
