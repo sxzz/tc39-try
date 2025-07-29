@@ -6,18 +6,11 @@ test('parse simple try expression', () => {
   const ast = parse(code).program
 
   const declaration = (ast as any).body[0].declarations[0]
-  expect(declaration.init.type).toBe('TryExpression')
-  expect(declaration.init.expression.type).toBe('CallExpression')
-  expect(declaration.init.expression.callee.name).toBe('something')
-})
-
-test('parse try expression with object literal', () => {
-  const code = 'const a = try ({ a: 10 })'
-  const ast = parse(code).program
-
-  const declaration = (ast as any).body[0].declarations[0]
-  expect(declaration.init.type).toBe('TryExpression')
-  expect(declaration.init.expression.type).toBe('ObjectExpression')
+  expect(declaration.init.type).toBe('UnaryExpression')
+  expect(declaration.init.operator).toBe('try')
+  expect(declaration.init.prefix).toBe(true)
+  expect(declaration.init.argument.type).toBe('CallExpression')
+  expect(declaration.init.argument.callee.name).toBe('something')
 })
 
 test('parse try expression in array destructuring', () => {
@@ -26,8 +19,10 @@ test('parse try expression in array destructuring', () => {
 
   const declaration = (ast as any).body[0].declarations[0]
   const arrayExpression = declaration.init.elements[0]
-  expect(arrayExpression.type).toBe('TryExpression')
-  expect(arrayExpression.expression.type).toBe('CallExpression')
+  expect(arrayExpression.type).toBe('UnaryExpression')
+  expect(arrayExpression.operator).toBe('try')
+  expect(arrayExpression.prefix).toBe(true)
+  expect(arrayExpression.argument.type).toBe('CallExpression')
 })
 
 test('parse try expression in array literal', () => {
@@ -35,8 +30,10 @@ test('parse try expression in array literal', () => {
   const ast = parse(code).program
 
   const declaration = (ast as any).body[0].declarations[0]
-  expect(declaration.init.type).toBe('TryExpression')
-  expect(declaration.init.expression.type).toBe('CallExpression')
+  expect(declaration.init.type).toBe('UnaryExpression')
+  expect(declaration.init.operator).toBe('try')
+  expect(declaration.init.prefix).toBe(true)
+  expect(declaration.init.argument.type).toBe('CallExpression')
 })
 
 test('parse try expression in arrow function', () => {
@@ -45,8 +42,10 @@ test('parse try expression in arrow function', () => {
 
   const callExpression = (ast as any).body[0].expression
   const arrowFunction = callExpression.arguments[0]
-  expect(arrowFunction.body.type).toBe('TryExpression')
-  expect(arrowFunction.body.expression.type).toBe('CallExpression')
+  expect(arrowFunction.body.type).toBe('UnaryExpression')
+  expect(arrowFunction.body.operator).toBe('try')
+  expect(arrowFunction.body.prefix).toBe(true)
+  expect(arrowFunction.body.argument.type).toBe('CallExpression')
 })
 
 test('parse try with yield', () => {
@@ -61,7 +60,9 @@ test('parse try with yield', () => {
   const returnStatement = functionDecl.body.body[0]
   const yieldExpression = returnStatement.argument
   expect(yieldExpression.type).toBe('YieldExpression')
-  expect(yieldExpression.argument.type).toBe('TryExpression')
+  expect(yieldExpression.argument.type).toBe('UnaryExpression')
+  expect(yieldExpression.argument.operator).toBe('try')
+  expect(yieldExpression.argument.prefix).toBe(true)
 })
 
 test('parse try yield', () => {
@@ -74,8 +75,10 @@ test('parse try yield', () => {
 
   const functionDecl = (ast as any).body[0]
   const expressionStatement = functionDecl.body.body[0]
-  expect(expressionStatement.expression.type).toBe('TryExpression')
-  expect(expressionStatement.expression.expression.type).toBe('YieldExpression')
+  expect(expressionStatement.expression.type).toBe('UnaryExpression')
+  expect(expressionStatement.expression.operator).toBe('try')
+  expect(expressionStatement.expression.prefix).toBe(true)
+  expect(expressionStatement.expression.argument.type).toBe('YieldExpression')
 })
 
 test('parse try await', () => {
@@ -88,8 +91,10 @@ test('parse try await', () => {
 
   const functionDecl = (ast as any).body[0]
   const expressionStatement = functionDecl.body.body[0]
-  expect(expressionStatement.expression.type).toBe('TryExpression')
-  expect(expressionStatement.expression.expression.type).toBe('AwaitExpression')
+  expect(expressionStatement.expression.type).toBe('UnaryExpression')
+  expect(expressionStatement.expression.operator).toBe('try')
+  expect(expressionStatement.expression.prefix).toBe(true)
+  expect(expressionStatement.expression.argument.type).toBe('AwaitExpression')
 })
 
 test('parse try with instanceof', () => {
@@ -97,11 +102,11 @@ test('parse try with instanceof', () => {
   const ast = parse(code).program
 
   const expressionStatement = (ast as any).body[0]
-  expect(expressionStatement.expression.type).toBe('TryExpression')
-  expect(expressionStatement.expression.expression.type).toBe(
-    'BinaryExpression',
-  )
-  expect(expressionStatement.expression.expression.operator).toBe('instanceof')
+  expect(expressionStatement.expression.type).toBe('UnaryExpression')
+  expect(expressionStatement.expression.operator).toBe('try')
+  expect(expressionStatement.expression.prefix).toBe(true)
+  expect(expressionStatement.expression.argument.type).toBe('BinaryExpression')
+  expect(expressionStatement.expression.argument.operator).toBe('instanceof')
 })
 
 test('parse nested try expressions', () => {
@@ -112,8 +117,10 @@ test('parse nested try expressions', () => {
 
   let current = declaration.init
   for (let i = 0; i < 5; i++) {
-    expect(current.type).toBe('TryExpression')
-    current = current.expression
+    expect(current.type).toBe('UnaryExpression')
+    expect(current.operator).toBe('try')
+    expect(current.prefix).toBe(true)
+    current = current.argument
   }
   expect(current.type).toBe('NumericLiteral')
   expect(current.value).toBe(1)
@@ -126,7 +133,9 @@ test('parse parenthesized try expression with instanceof', () => {
   const expressionStatement = (ast as any).body[0]
   expect(expressionStatement.expression.type).toBe('BinaryExpression')
   expect(expressionStatement.expression.operator).toBe('instanceof')
-  expect(expressionStatement.expression.left.type).toBe('TryExpression')
+  expect(expressionStatement.expression.left.type).toBe('UnaryExpression')
+  expect(expressionStatement.expression.left.operator).toBe('try')
+  expect(expressionStatement.expression.left.prefix).toBe(true)
   expect(expressionStatement.expression.right.name).toBe('Result')
 })
 

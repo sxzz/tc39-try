@@ -4,7 +4,7 @@ import { tsPlugin } from 'acorn-typescript'
 import { walk } from 'estree-walker'
 import { generateTransform, MagicStringAST } from 'magic-string-ast'
 import { createUnplugin, type UnpluginInstance } from 'unplugin'
-import { tryExpressionPlugin } from './acorn'
+import { tryOperatorPlugin } from './acorn'
 
 const unplugin: UnpluginInstance<{} | undefined, false> = createUnplugin(() => {
   return {
@@ -26,7 +26,7 @@ const unplugin: UnpluginInstance<{} | undefined, false> = createUnplugin(() => {
         } else if (id.endsWith('.jsx')) {
           parser = parser.extend(jsx())
         }
-        parser = parser.extend(tryExpressionPlugin())
+        parser = parser.extend(tryOperatorPlugin())
 
         const ast = parser.parse(code, {
           ecmaVersion: 'latest',
@@ -36,12 +36,12 @@ const unplugin: UnpluginInstance<{} | undefined, false> = createUnplugin(() => {
         const s = new MagicStringAST(code)
         walk(ast as any, {
           enter(node: any) {
-            if (node.type === 'TryExpression') {
-              let expressionStart = node.expression.start
+            if (node.type === 'UnaryExpression' && node.operator === 'try') {
+              let expressionStart = node.argument.start
 
-              const isAwait = node.expression.type === 'AwaitExpression'
+              const isAwait = node.argument.type === 'AwaitExpression'
               if (isAwait) {
-                expressionStart = node.expression.argument.start
+                expressionStart = node.argument.argument.start
               }
 
               s.overwrite(
@@ -49,10 +49,10 @@ const unplugin: UnpluginInstance<{} | undefined, false> = createUnplugin(() => {
                 expressionStart,
                 `${isAwait ? 'await ' : ''}__t(() => (`,
               )
-              if (node.expression.end === node.end) {
+              if (node.argument.end === node.end) {
                 s.appendLeft(node.end, '))')
               } else {
-                s.overwrite(node.expression.end, node.end, '))')
+                s.overwrite(node.argument.end, node.end, '))')
               }
             }
           },

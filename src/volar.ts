@@ -2,11 +2,11 @@ import { Parser } from 'acorn'
 import { tsPlugin } from 'acorn-typescript'
 import { walk } from 'estree-walker'
 import { createPlugin, type PluginReturn } from 'ts-macro'
-import { tryExpressionPlugin } from './acorn'
+import { tryOperatorPlugin } from './acorn'
 
 const plugin: PluginReturn<undefined, false> = createPlugin(() => {
   // @ts-expect-error
-  const parser = Parser.extend(tsPlugin()).extend(tryExpressionPlugin())
+  const parser = Parser.extend(tsPlugin()).extend(tryOperatorPlugin())
 
   return {
     name: 'tc39-try',
@@ -26,20 +26,20 @@ const plugin: PluginReturn<undefined, false> = createPlugin(() => {
       let changed = false
       walk(program as any, {
         enter(node: any) {
-          if (node.type === 'TryExpression') {
-            let expressionStart = node.expression.start
+          if (node.type === 'UnaryExpression' && node.operator === 'try') {
+            let argumentStart = node.argument.start
 
-            const isAwait = node.expression.type === 'AwaitExpression'
+            const isAwait = node.argument.type === 'AwaitExpression'
             if (isAwait) {
-              expressionStart = node.expression.argument.start
+              argumentStart = node.argument.argument.start
             }
 
             codes.replaceRange(
               node.start,
-              expressionStart,
+              argumentStart,
               `${isAwait ? 'await ' : ''}__t(() => (`,
             )
-            codes.replaceRange(node.expression.end, node.end, '))')
+            codes.replaceRange(node.argument.end, node.end, '))')
             changed = true
           }
         },

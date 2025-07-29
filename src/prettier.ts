@@ -6,7 +6,7 @@ import { parsers as babel } from 'prettier/plugins/babel.mjs'
 import { printers } from 'prettier/plugins/estree.mjs'
 // @ts-expect-error
 import { parsers as typescript } from 'prettier/plugins/typescript.mjs'
-import { TryParser } from './acorn'
+import { TryOperatorParser } from './acorn'
 import { parse as babelParse } from './babel'
 import { parse as eslintTsParse } from './eslint-typescript'
 import type { ParserOptions } from '@babel/parser'
@@ -17,7 +17,7 @@ const acornParser: Parser = {
   ...espree.acorn,
   parse(text) {
     const comments: Comment[] = []
-    const ast = TryParser.parse(text, {
+    const ast = TryOperatorParser.parse(text, {
       ecmaVersion: 'latest',
       sourceType: 'module',
       onComment: comments,
@@ -112,23 +112,18 @@ const plugin: Plugin = {
     estree: {
       ...printers.estree,
       print(path, options, print) {
-        if (path.node.type === 'TryExpression') {
-          const needsRootParens = [
-            'BinaryExpression',
-            'MemberExpression',
-          ].includes(path.parent.type)
-          const needParens = [
-            'BinaryExpression',
-            'TryExpression',
-            'ObjectExpression',
-          ].includes(path.node.expression.type)
+        if (
+          path.node.type === 'UnaryExpression' &&
+          path.node.operator === 'try'
+        ) {
+          const needParens = ['UnaryExpression', 'ObjectExpression'].includes(
+            path.node.argument.type,
+          )
           return [
-            needsRootParens ? '(' : '',
             'try ',
             needParens ? '(' : '',
-            path.call(print, 'expression'),
+            path.call(print, 'argument'),
             needParens ? ')' : '',
-            needsRootParens ? ')' : '',
           ]
         }
         return printers.estree.print(path, options, print)

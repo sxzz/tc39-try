@@ -15,9 +15,11 @@ export function parse(code: string, options?: Options): any {
       }
       return ast
     },
-    (start, end, expression) => ({
-      type: 'TryExpression',
-      expression,
+    (start, end, argument) => ({
+      type: 'UnaryExpression',
+      operator: 'try',
+      argument,
+      prefix: true,
       start,
       end,
       range: [start, end],

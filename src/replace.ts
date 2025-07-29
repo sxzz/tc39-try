@@ -2,7 +2,7 @@ import { Parser } from 'acorn'
 import jsx from 'acorn-jsx'
 import { tsPlugin } from 'acorn-typescript'
 import { walk } from 'estree-walker'
-import { tryExpressionPlugin } from './acorn'
+import { tryOperatorPlugin } from './acorn'
 
 type NodeInfo = [
   code: string,
@@ -14,7 +14,7 @@ type NodeInfo = [
 
 type ParseFn = (src: string, isExpression: boolean) => any
 
-type BuildFn = (start: number, end: number, expression: any) => any
+type BuildFn = (start: number, end: number, argument: any) => any
 
 function getRange(node: any) {
   return node.range || [node.start, node.end]
@@ -35,7 +35,7 @@ export function replace(
   } else if (isJSX) {
     parser = parser.extend(jsx())
   }
-  parser = parser.extend(tryExpressionPlugin())
+  parser = parser.extend(tryOperatorPlugin())
 
   const ast = parser.parse(source, {
     ecmaVersion: 'latest',
@@ -47,24 +47,24 @@ export function replace(
 
   walk(ast as any, {
     enter(node: any) {
-      if (node.type === 'TryExpression') {
+      if (node.type === 'UnaryExpression' && node.operator === 'try') {
         if (framework === 'eslint-typescript-parser') {
           replacedSource =
             replacedSource.slice(0, node.start) +
-            ' '.repeat(node.expression.start - node.start) +
-            replacedSource.slice(node.expression.start, node.expression.end) +
-            ' '.repeat(node.end - node.expression.end) +
+            ' '.repeat(node.argument.start - node.start) +
+            replacedSource.slice(node.argument.start, node.argument.end) +
+            ' '.repeat(node.end - node.argument.end) +
             replacedSource.slice(node.end)
           return
         }
 
-        const valid = source.slice(node.expression.start, node.expression.end)
+        const valid = source.slice(node.argument.start, node.argument.end)
         sources.push([
           valid,
           node.start,
           node.end,
-          node.expression.start,
-          node.expression.end,
+          node.argument.start,
+          node.argument.end,
         ])
 
         const originalLength = node.end - node.start
@@ -94,7 +94,7 @@ export function replace(
 
       if (!found) return
 
-      const newNode = build(start, end, processExpression(sources, found))
+      const newNode = build(start, end, processArgument(sources, found))
       this.replace(newNode)
       this.skip()
     },
@@ -102,28 +102,28 @@ export function replace(
 
   return finalAST
 
-  function processExpression(sources: NodeInfo[], node: NodeInfo): any {
-    const [, , , expressionStart, expressionEnd] = node
+  function processArgument(sources: NodeInfo[], node: NodeInfo): any {
+    const [, , , argumentStart, argumentEnd] = node
 
-    const expression = sources.find(
-      ([, start, end]) => start >= expressionStart && end <= expressionEnd,
+    const argument = sources.find(
+      ([, start, end]) => start >= argumentStart && end <= argumentEnd,
     )
-    if (expression) {
-      const exprNode = processExpression(sources, expression)
+    if (argument) {
+      const exprNode = processArgument(sources, argument)
       const fullMatch =
-        expression[1] === expressionStart && expression[2] === expressionEnd
+        argument[1] === argumentStart && argument[2] === argumentEnd
 
       if (fullMatch) {
-        return build(expression[1], expression[2], exprNode)
+        return build(argument[1], argument[2], exprNode)
       } else {
-        throw new Error('Not supported expression structure')
+        throw new Error('Not supported syntax')
       }
     } else {
       const ast = parse(node[0], true)
 
-      ast.range = [expressionStart, expressionEnd]
-      ast.start = expressionStart
-      ast.end = expressionEnd
+      ast.range = [argumentStart, argumentEnd]
+      ast.start = argumentStart
+      ast.end = argumentEnd
 
       return ast
     }

@@ -18,9 +18,10 @@ export function parse(src: string, options?: TSESTreeOptions): any {
 
       return ast
     },
-    (start, end, expression) => ({
-      type: 'TryExpression',
-      expression,
+    (start, end, argument) => ({
+      type: 'UnaryExpression',
+      operator: 'try',
+      argument,
       start,
       end,
       range: [start, end],

@@ -27,9 +27,11 @@ export function parse(src: string, options?: ParserOptions): ParseResult<File> {
         ...options,
       })
     },
-    (start, end, expression) => ({
-      type: 'TryExpression',
-      expression,
+    (start, end, argument) => ({
+      type: 'UnaryExpression',
+      operator: 'try',
+      argument,
+      prefix: true,
       start,
       end,
       range: [start, end],

@@ -34,7 +34,7 @@ test.each(['acorn', 'babel', 'babel-ts'])(
 const [[ok, err, val]] = [try something()]
 const [ok2, err2, val2] = try something()
 array.map((fn) => try fn())
-try await something()
+try (await something())
 try (a instanceof b)
 ;(try aa) instanceof Result
 const b = try (try (try (try (try 111))))
@@ -42,7 +42,7 @@ const result = try ({ data: work() })
 
 function* gen() {
   yield try something()
-  try yield something()
+  try (yield something())
 }
 `,
     )

@@ -1,11 +1,6 @@
 import { Parser, type Node } from 'acorn'
 
-export interface TryExpressionNode extends Node {
-  type: 'TryExpression'
-  expression: Node
-}
-
-export function tryExpressionPlugin(): (Parser: any) => any {
+export function tryOperatorPlugin(): (Parser: any) => any {
   return function (Parser: any) {
     Parser.acorn.tokTypes._try.startsExpr = true
     return class extends Parser {
@@ -30,8 +25,8 @@ export function tryExpressionPlugin(): (Parser: any) => any {
             ;(this as any).startLoc = origStartLoc
             ;(this as any).endLoc = origEndLoc
 
-            const node = (this as any).startNode()
-            node.expression = this.parseTryExpression()
+            const node = this.startNode()
+            node.expression = this.parseTryUnaryExpression()
             ;(this as any).semicolon()
             return (this as any).finishNode(node, 'ExpressionStatement')
           }
@@ -39,18 +34,20 @@ export function tryExpressionPlugin(): (Parser: any) => any {
         return super.parseStatement(context, topLevel, exports)
       }
 
-      parseTryExpression(): TryExpressionNode {
-        const node = (this as any).startNode() as TryExpressionNode
+      parseTryUnaryExpression(): Node {
+        const node = (this as any).startNode()
         ;(this as any).next() // consume 'try'
 
-        node.expression = (this as any).parseMaybeAssign()
+        node.operator = 'try'
+        node.prefix = true
+        node.argument = (this as any).parseMaybeAssign()
 
-        return (this as any).finishNode(node, 'TryExpression')
+        return (this as any).finishNode(node, 'UnaryExpression')
       }
 
       parseExprAtom(refDestructuringErrors?: any): Node {
         if ((this as any).type.keyword === 'try') {
-          return this.parseTryExpression()
+          return this.parseTryUnaryExpression()
         }
 
         return super.parseExprAtom(refDestructuringErrors)
@@ -62,7 +59,7 @@ export function tryExpressionPlugin(): (Parser: any) => any {
         incDec?: boolean,
       ): Node {
         if ((this as any).type.keyword === 'try') {
-          return this.parseTryExpression()
+          return this.parseTryUnaryExpression()
         }
 
         return super.parseMaybeUnary(refDestructuringErrors, sawUnary, incDec)
@@ -70,13 +67,14 @@ export function tryExpressionPlugin(): (Parser: any) => any {
 
       parseYield(noIn?: boolean): Node {
         if ((this as any).type.keyword === 'try') {
-          const node = (this as any).startNode() as TryExpressionNode
+          const node = (this as any).startNode()
           ;(this as any).next() // consume 'try'
 
-          // Parse yield expression
-          node.expression = super.parseYield(noIn)
+          node.operator = 'try'
+          node.prefix = true
+          node.argument = super.parseYield(noIn)
 
-          return (this as any).finishNode(node, 'TryExpression')
+          return (this as any).finishNode(node, 'UnaryExpression')
         }
 
         return super.parseYield(noIn)
@@ -85,12 +83,14 @@ export function tryExpressionPlugin(): (Parser: any) => any {
       // Override parseAwait to handle "try await" expressions
       parseAwait(): Node {
         if ((this as any).type.keyword === 'try') {
-          const node = (this as any).startNode() as TryExpressionNode
+          const node = (this as any).startNode()
           ;(this as any).next() // consume 'try'
 
-          node.expression = super.parseAwait()
+          node.operator = 'try'
+          node.prefix = true
+          node.argument = super.parseAwait()
 
-          return (this as any).finishNode(node, 'TryExpression')
+          return (this as any).finishNode(node, 'UnaryExpression')
         }
 
         return super.parseAwait()
@@ -99,4 +99,5 @@ export function tryExpressionPlugin(): (Parser: any) => any {
   }
 }
 
-export const TryParser: typeof Parser = Parser.extend(tryExpressionPlugin())
+export const TryOperatorParser: typeof Parser =
+  Parser.extend(tryOperatorPlugin())
