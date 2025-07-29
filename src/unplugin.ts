@@ -12,7 +12,7 @@ const unplugin: UnpluginInstance<{} | undefined, false> = createUnplugin(() => {
     enforce: 'pre',
     transform: {
       filter: {
-        code: 'try ',
+        code: /\btry\b/,
         id: {
           include: /\.[cm]?[jt]sx?$/,
           exclude: /node_modules/,
