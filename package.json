@@ -72,15 +72,18 @@
     "@sxzz/eslint-config": "^7.0.6",
     "@sxzz/prettier-config": "^2.2.3",
     "@sxzz/test-utils": "^0.5.7",
+    "@ts-macro/language-plugin": "^0.3.1",
     "@ts-macro/tsc": "^0.3.0",
     "@types/espree": "^10.1.0",
     "@types/node": "^24.0.15",
+    "@volar/typescript": "^2.4.22",
     "bumpp": "^10.2.0",
     "eslint": "^9.31.0",
     "tsdown": "^0.12.9",
     "tsx": "^4.20.3",
     "typescript": "^5.8.3",
     "unplugin-oxc": "^0.4.8",
+    "vite": "^7.0.6",
     "vitest": "^3.2.4"
   },
   "engines": {
