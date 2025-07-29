@@ -2,7 +2,7 @@ import {
   parse as tsEslintParse,
   type TSESTreeOptions,
 } from '@typescript-eslint/typescript-estree'
-import { replace } from './replace'
+import { buildTryOperator, replace } from './replace'
 
 export function parse(src: string, options?: TSESTreeOptions): any {
   return replace(
@@ -18,13 +18,6 @@ export function parse(src: string, options?: TSESTreeOptions): any {
 
       return ast
     },
-    (start, end, argument) => ({
-      type: 'UnaryExpression',
-      operator: 'try',
-      argument,
-      start,
-      end,
-      range: [start, end],
-    }),
+    buildTryOperator,
   )
 }

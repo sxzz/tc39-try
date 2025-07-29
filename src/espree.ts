@@ -1,5 +1,5 @@
 import { parse as _parse, type Options } from 'espree'
-import { replace } from './replace'
+import { buildTryOperator, replace } from './replace'
 
 export function parse(code: string, options?: Options): any {
   return replace(
@@ -15,15 +15,7 @@ export function parse(code: string, options?: Options): any {
       }
       return ast
     },
-    (start, end, argument) => ({
-      type: 'UnaryExpression',
-      operator: 'try',
-      argument,
-      prefix: true,
-      start,
-      end,
-      range: [start, end],
-    }),
+    buildTryOperator,
   )
 }
 export * from 'espree'

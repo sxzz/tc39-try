@@ -76,19 +76,23 @@ export function replace(
   })
 
   const finalAST = parse(replacedSource, false)
+  if (framework === 'eslint-typescript-parser') {
+    return finalAST
+  }
+
   walk(finalAST as any, {
     enter(node) {
       if (['File', 'Program', 'ExpressionStatement'].includes(node.type)) {
         return
       }
+
       const [start, end] = getRange(node)
-      const found = sources.find(
+      const valid = sources.find(
         ([, _start, _end]) => start === _start && end === _end,
       )
+      if (!valid) return
 
-      if (!found) return
-
-      const newNode = build(start, end, processArgument(sources, found))
+      const newNode = build(start, end, processValid(valid))
       this.replace(newNode)
       this.skip()
     },
@@ -96,30 +100,45 @@ export function replace(
 
   return finalAST
 
-  function processArgument(sources: NodeInfo[], node: NodeInfo): any {
-    const [, , , argumentStart, argumentEnd] = node
+  function processValid(node: NodeInfo): any {
+    const [, , , validStart, validEnd] = node
 
-    const argument = sources.find(
-      ([, start, end]) => start >= argumentStart && end <= argumentEnd,
+    const valid = sources.find(
+      ([, start, end]) => start >= validStart && end <= validEnd,
     )
-    if (argument) {
-      const exprNode = processArgument(sources, argument)
-      const fullMatch =
-        argument[1] === argumentStart && argument[2] === argumentEnd
+    if (valid) {
+      const validNode = processValid(valid)
+      const fullMatch = valid[1] === validStart && valid[2] === validEnd
 
       if (fullMatch) {
-        return build(argument[1], argument[2], exprNode)
+        return build(valid[1], valid[2], validNode)
       } else {
-        throw new Error('Not supported syntax')
+        throw new Error('Unsupported syntax')
       }
     } else {
       const ast = parse(node[0], true)
 
-      ast.range = [argumentStart, argumentEnd]
-      ast.start = argumentStart
-      ast.end = argumentEnd
+      ast.range = [validStart, validEnd]
+      ast.start = validStart
+      ast.end = validEnd
 
       return ast
     }
+  }
+}
+
+export function buildTryOperator(
+  start: number,
+  end: number,
+  argument: any,
+): any {
+  return {
+    type: 'UnaryExpression',
+    operator: 'try',
+    argument,
+    prefix: true,
+    start,
+    end,
+    range: [start, end],
   }
 }

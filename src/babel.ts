@@ -4,7 +4,7 @@ import {
   type ParseResult,
   type ParserOptions,
 } from '@babel/parser'
-import { replace } from './replace'
+import { buildTryOperator, replace } from './replace'
 import type { File } from '@babel/types'
 
 export function parse(src: string, options?: ParserOptions): ParseResult<File> {
@@ -27,14 +27,6 @@ export function parse(src: string, options?: ParserOptions): ParseResult<File> {
         ...options,
       })
     },
-    (start, end, argument) => ({
-      type: 'UnaryExpression',
-      operator: 'try',
-      argument,
-      prefix: true,
-      start,
-      end,
-      range: [start, end],
-    }),
+    buildTryOperator,
   )
 }

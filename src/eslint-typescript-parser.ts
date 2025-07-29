@@ -2,7 +2,7 @@ import {
   parseForESLint as _parseForESLint,
   type ParserOptions,
 } from '@typescript-eslint/parser'
-import { replace } from './replace'
+import { buildTryOperator, replace } from './replace'
 import type { SourceFile } from 'typescript'
 
 export {
@@ -38,15 +38,7 @@ export function parseForESLint(
 
       return ast
     },
-    (start, end, argument) => ({
-      type: 'UnaryExpression',
-      operator: 'try',
-      argument,
-      prefix: true,
-      start,
-      end,
-      range: [start, end],
-    }),
+    buildTryOperator,
   )
 
   return ast
