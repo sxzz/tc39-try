@@ -46,11 +46,7 @@ export default defineConfig({
 
 ### TypeScript Macro
 
-For proper syntax highlighting and IntelliSense support of the try operator, install the [TS Macro extension](https://marketplace.visualstudio.com/items?itemName=zhiyuanzmj.vscode-ts-macro) in VS Code:
-
-```bash
-ext install zhiyuanzmj.vscode-ts-macro
-```
+For proper syntax highlighting and IntelliSense support of the try operator, install the [TS Macro extension](https://marketplace.visualstudio.com/items?itemName=zhiyuanzmj.vscode-ts-macro) in VS Code.
 
 Alternatively, search for "TS Macro" in the VS Code Extensions marketplace.
 
@@ -120,8 +116,8 @@ try {
 
 #### With the `try` operator:
 
-```typescript
-const result2 = try riskyFunction() // Returns Result
+```ts
+const result2 = try riskyFunction() // Returns Result<T>
 ```
 
 ## Sponsors
