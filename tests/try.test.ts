@@ -2,7 +2,7 @@
 import { Result } from 'try'
 import { expect, test } from 'vitest'
 
-test('try runtime', async () => {
+test('try', async () => {
   function ok() {
     return 42
   }

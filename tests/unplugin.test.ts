@@ -4,8 +4,9 @@ import UnpluginOxc from 'unplugin-oxc/vite'
 import { describe } from 'vitest'
 import unplugin from '../src/unplugin'
 
+const { dirname } = import.meta
+
 describe('unplugin', async () => {
-  const { dirname } = import.meta
   await testFixtures(
     '*.ts',
     async (args, id) => {
