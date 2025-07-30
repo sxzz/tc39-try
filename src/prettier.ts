@@ -131,12 +131,6 @@ const plugin: Plugin = {
         }
         return printers.estree.print(path, options, print)
       },
-      getVisitorKeys(node: any): string[] {
-        if (node.type === 'TryExpression') {
-          return ['expression']
-        }
-        return printers.estree.getVisitorKeys(node)
-      },
     },
   },
 }
