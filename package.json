@@ -2,7 +2,7 @@
   "name": "tc39-try",
   "version": "0.3.2",
   "packageManager": "pnpm@10.13.1",
-  "description": "An Acorn plugin for parsing JavaScript try expressions",
+  "description": "Enable support for try expressions in JavaScript tools",
   "type": "module",
   "license": "MIT",
   "homepage": "https://github.com/sxzz/tc39-try#readme",
