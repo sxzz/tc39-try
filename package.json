@@ -51,14 +51,6 @@
     "typescript": "^5.8.3"
   },
   "dependencies": {
-    "@babel/parser": "^7.28.0",
-    "@typescript-eslint/parser": "^8.38.0",
-    "@typescript-eslint/typescript-estree": "^8.38.0",
-    "acorn": "^8.15.0",
-    "acorn-jsx": "^5.3.2",
-    "acorn-typescript": "^1.4.13",
-    "espree": "^10.4.0",
-    "estree-walker": "^3.0.3",
     "magic-string-ast": "^1.0.0",
     "try": "^1.0.0-beta.9",
     "ts-macro": "^0.3.0",
@@ -75,6 +67,7 @@
     "@types/espree": "^10.1.0",
     "@types/node": "^24.0.15",
     "@volar/typescript": "^2.4.22",
+    "acorn": "^8.15.0",
     "bumpp": "^10.2.0",
     "eslint": "^9.31.0",
     "tsdown": "^0.12.9",

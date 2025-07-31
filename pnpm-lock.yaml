@@ -8,30 +8,6 @@ importers:
 
   .:
     dependencies:
-      '@babel/parser':
-        specifier: ^7.28.0
-        version: 7.28.0
-      '@typescript-eslint/parser':
-        specifier: ^8.38.0
-        version: 8.38.0(eslint@9.32.0(jiti@2.5.1))(typescript@5.8.3)
-      '@typescript-eslint/typescript-estree':
-        specifier: ^8.38.0
-        version: 8.38.0(typescript@5.8.3)
-      acorn:
-        specifier: ^8.15.0
-        version: 8.15.0
-      acorn-jsx:
-        specifier: ^5.3.2
-        version: 5.3.2(acorn@8.15.0)
-      acorn-typescript:
-        specifier: ^1.4.13
-        version: 1.4.13(acorn@8.15.0)
-      espree:
-        specifier: ^10.4.0
-        version: 10.4.0
-      estree-walker:
-        specifier: ^3.0.3
-        version: 3.0.3
       magic-string-ast:
         specifier: ^1.0.0
         version: 1.0.0
@@ -78,6 +54,9 @@ importers:
       '@volar/typescript':
         specifier: ^2.4.22
         version: 2.4.22
+      acorn:
+        specifier: ^8.15.0
+        version: 8.15.0
       bumpp:
         specifier: ^10.2.0
         version: 10.2.0
