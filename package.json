@@ -24,6 +24,7 @@
   "exports": {
     ".": "./dist/index.js",
     "./acorn": "./dist/acorn.js",
+    "./eslint": "./dist/eslint.js",
     "./prettier": "./dist/prettier.js",
     "./runtime": "./dist/runtime.js",
     "./unplugin": "./dist/unplugin.js",
