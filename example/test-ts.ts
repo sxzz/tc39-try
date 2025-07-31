@@ -1,4 +1,4 @@
-import type { Result } from 'tc39-try'
+import type { Result } from 'tc39-try/runtime'
 
 // @ts-expect-error
 // eslint-disable-next-line unused-imports/no-unused-vars
