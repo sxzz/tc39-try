@@ -55,7 +55,7 @@
     "try": "^1.0.0-beta.9",
     "ts-macro": "^0.3.0",
     "unplugin": "^2.3.5",
-    "untsx": "^0.1.1"
+    "untsx": "^0.1.2"
   },
   "devDependencies": {
     "@babel/types": "^7.28.2",

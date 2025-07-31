@@ -29,6 +29,7 @@ export const untsx: UntsxInstance = createUntsx({
     }
   },
 
+  shouldTransform: (code) => /\btry\b/.test(code),
   transform(
     code: string,
     id: string,
