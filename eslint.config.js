@@ -1,6 +1,5 @@
 import { GLOB_JS, GLOB_TS, sxzz } from '@sxzz/eslint-config'
-import * as tsParser from './dist/eslint-typescript-parser.js'
-import * as jsParser from './dist/espree.js'
+import { jsParser, tsParser } from './dist/eslint.js'
 
 export default sxzz().append(
   {

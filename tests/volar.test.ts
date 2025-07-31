@@ -18,16 +18,19 @@ const fixtures = import.meta.glob('./fixtures/*.ts', {
 describe('volar', async () => {
   const compilerOptions: ts.CompilerOptions = {}
   const host = ts.createCompilerHost(compilerOptions)
-  const createProgram = proxyCreateProgram(ts, ts.createProgram, (
+  const createProgram = proxyCreateProgram(
     ts,
-    options,
-  ) => getLanguagePlugins(ts, options.options, { plugins: [volar()] }))
+    ts.createProgram,
+    (ts, options) =>
+      getLanguagePlugins(ts, options.options, { plugins: [volar()] }),
+  )
 
   const program = createProgram({
     options: compilerOptions,
     host,
     rootNames: Object.keys(fixtures).map((id) =>
-      path.resolve(import.meta.dirname, id)),
+      path.resolve(import.meta.dirname, id),
+    ),
   })
 
   await testFixtures(
