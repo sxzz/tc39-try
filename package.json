@@ -24,12 +24,8 @@
   "exports": {
     ".": "./dist/index.js",
     "./acorn": "./dist/acorn.js",
-    "./babel": "./dist/babel.js",
-    "./eslint-typescript": "./dist/eslint-typescript.js",
-    "./eslint-typescript-parser": "./dist/eslint-typescript-parser.js",
-    "./espree": "./dist/espree.js",
     "./prettier": "./dist/prettier.js",
-    "./replace": "./dist/replace.js",
+    "./runtime": "./dist/runtime.js",
     "./unplugin": "./dist/unplugin.js",
     "./volar": "./dist/volar.js",
     "./package.json": "./package.json"
@@ -65,7 +61,8 @@
     "magic-string-ast": "^1.0.0",
     "try": "^1.0.0-beta.9",
     "ts-macro": "^0.3.0",
-    "unplugin": "^2.3.5"
+    "unplugin": "^2.3.5",
+    "untsx": "^0.1.1"
   },
   "devDependencies": {
     "@babel/types": "^7.28.2",

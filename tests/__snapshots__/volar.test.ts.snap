@@ -1,7 +1,7 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`volar > basic.ts 1`] = `
-"import { t as __v_try } from 'tc39-try';
+"import { t as __v_try } from 'tc39-try/runtime';
 import { Result } from 'try'
 function fn() {
   return 10

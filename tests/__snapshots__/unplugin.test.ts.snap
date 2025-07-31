@@ -2,7 +2,7 @@
 
 exports[`unplugin > basic.ts 1`] = `
 "// basic.js
-import { t } from 'tc39-try';
+import { t } from 'tc39-try/runtime';
 
 function fn() {
 	return 10;

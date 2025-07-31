@@ -1,4 +1,4 @@
-import { Parser, type Node } from 'acorn'
+import type { Node } from 'acorn'
 
 export function tryOperatorPlugin(): (Parser: any) => any {
   return function (Parser: any) {
@@ -98,6 +98,3 @@ export function tryOperatorPlugin(): (Parser: any) => any {
     }
   }
 }
-
-export const TryOperatorParser: typeof Parser =
-  Parser.extend(tryOperatorPlugin())
