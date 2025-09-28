@@ -42,7 +42,7 @@
     "test": "vitest",
     "typecheck": "tsmc --noEmit",
     "format": "prettier --cache --write .",
-    "release": "bumpp && pnpm publish",
+    "release": "bumpp",
     "prepublishOnly": "pnpm run build"
   },
   "peerDependencies": {
