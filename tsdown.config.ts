@@ -1,7 +1,8 @@
 import { defineConfig } from 'tsdown'
 
 export default defineConfig({
-  entry: ['./src'],
+  entry: 'src/*.ts',
   platform: 'neutral',
+  inlineOnly: [],
   exports: true,
 })
