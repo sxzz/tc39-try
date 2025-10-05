@@ -1,10 +1,5 @@
-/// <reference types="vite/client" />
-
 import path from 'node:path'
-import { testFixtures } from '@sxzz/test-utils'
-import { getLanguagePlugins } from '@ts-macro/language-plugin'
-import { proxyCreateProgram } from '@volar/typescript'
-import * as ts from 'typescript'
+import { createTsMacroProgram, testFixtures } from '@sxzz/test-utils'
 import { describe } from 'vitest'
 import volar from '../src/volar'
 
@@ -16,22 +11,10 @@ const fixtures = import.meta.glob('./fixtures/*.ts', {
 })
 
 describe('volar', async () => {
-  const compilerOptions: ts.CompilerOptions = {}
-  const host = ts.createCompilerHost(compilerOptions)
-  const createProgram = proxyCreateProgram(
-    ts,
-    ts.createProgram,
-    (ts, options) =>
-      getLanguagePlugins(ts, options.options, { plugins: [volar()] }),
+  const program = await createTsMacroProgram(
+    Object.keys(fixtures).map((id) => path.resolve(import.meta.dirname, id)),
+    [volar()],
   )
-
-  const program = createProgram({
-    options: compilerOptions,
-    host,
-    rootNames: Object.keys(fixtures).map((id) =>
-      path.resolve(import.meta.dirname, id),
-    ),
-  })
 
   await testFixtures(
     '*.ts',
