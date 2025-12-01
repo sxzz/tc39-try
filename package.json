@@ -1,7 +1,7 @@
 {
   "name": "tc39-try",
   "version": "0.4.3",
-  "packageManager": "pnpm@10.23.0",
+  "packageManager": "pnpm@10.24.0",
   "description": "Enable support for try expressions in JavaScript tools",
   "type": "module",
   "license": "MIT",
@@ -59,23 +59,23 @@
   },
   "devDependencies": {
     "@babel/types": "^7.28.5",
-    "@sxzz/eslint-config": "^7.3.2",
-    "@sxzz/prettier-config": "^2.2.5",
+    "@sxzz/eslint-config": "^7.4.0",
+    "@sxzz/prettier-config": "^2.2.6",
     "@sxzz/test-utils": "^0.5.13",
     "@ts-macro/language-plugin": "^0.3.6",
     "@ts-macro/tsc": "^0.3.6",
     "@types/espree": "^10.1.0",
     "@types/node": "^24.10.1",
-    "@volar/typescript": "^2.4.23",
+    "@volar/typescript": "^2.4.26",
     "acorn": "^8.15.0",
-    "bumpp": "^10.3.1",
+    "bumpp": "^10.3.2",
     "eslint": "^9.39.1",
-    "tsdown": "^0.16.6",
-    "tsx": "^4.20.6",
+    "tsdown": "^0.16.8",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "unplugin-oxc": "^0.5.5",
-    "vite": "^7.2.4",
-    "vitest": "^4.0.13"
+    "vite": "^7.2.6",
+    "vitest": "^4.0.14"
   },
   "engines": {
     "node": ">=20.19.0"
