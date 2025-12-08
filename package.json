@@ -1,26 +1,20 @@
 {
   "name": "tc39-try",
+  "type": "module",
   "version": "0.4.3",
   "packageManager": "pnpm@10.24.0",
   "description": "Enable support for try expressions in JavaScript tools",
-  "type": "module",
+  "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
+  "funding": "https://github.com/sponsors/sxzz",
   "homepage": "https://github.com/sxzz/tc39-try#readme",
-  "bugs": {
-    "url": "https://github.com/sxzz/tc39-try/issues"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sxzz/tc39-try.git"
   },
-  "author": "Kevin Deng <sxzz@sxzz.moe>",
-  "funding": "https://github.com/sponsors/sxzz",
-  "files": [
-    "dist"
-  ],
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "bugs": {
+    "url": "https://github.com/sxzz/tc39-try/issues"
+  },
   "exports": {
     ".": "./dist/index.js",
     "./acorn": "./dist/acorn.js",
@@ -31,8 +25,17 @@
     "./volar": "./dist/volar.js",
     "./package.json": "./package.json"
   },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "publishConfig": {
     "access": "public"
+  },
+  "engines": {
+    "node": ">=20.19.0"
   },
   "scripts": {
     "lint": "eslint --cache .",
@@ -55,11 +58,11 @@
     "try": "^1.0.1",
     "ts-macro": "^0.3.6",
     "unplugin": "^2.3.11",
-    "untsx": "^0.1.2"
+    "untsx": "^0.1.3"
   },
   "devDependencies": {
     "@babel/types": "^7.28.5",
-    "@sxzz/eslint-config": "^7.4.0",
+    "@sxzz/eslint-config": "^7.4.1",
     "@sxzz/prettier-config": "^2.2.6",
     "@sxzz/test-utils": "^0.5.13",
     "@ts-macro/language-plugin": "^0.3.6",
@@ -70,14 +73,11 @@
     "acorn": "^8.15.0",
     "bumpp": "^10.3.2",
     "eslint": "^9.39.1",
-    "tsdown": "^0.16.8",
+    "tsdown": "^0.17.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "unplugin-oxc": "^0.5.5",
-    "vite": "^7.2.6",
-    "vitest": "^4.0.14"
-  },
-  "engines": {
-    "node": ">=20.19.0"
+    "vite": "^7.2.7",
+    "vitest": "^4.0.15"
   }
 }
