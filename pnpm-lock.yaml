@@ -18,8 +18,8 @@ importers:
         specifier: ^1.0.3
         version: 1.0.3
       ts-macro:
-        specifier: ^0.3.6
-        version: 0.3.6
+        specifier: ^0.3.7
+        version: 0.3.7
       unplugin:
         specifier: ^2.3.11
         version: 2.3.11
@@ -38,13 +38,13 @@ importers:
         version: 2.2.6
       '@sxzz/test-utils':
         specifier: ^0.5.15
-        version: 0.5.15(@ts-macro/language-plugin@0.3.6(rollup@4.53.3))(@volar/typescript@2.4.27)(esbuild@0.27.1)(rolldown@1.0.0-beta.57)(rollup@4.53.3)(typescript@5.9.3)(vitest@4.0.16(@types/node@24.10.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))
+        version: 0.5.15(@ts-macro/language-plugin@0.3.7(rollup@4.53.3))(@volar/typescript@2.4.27)(esbuild@0.27.1)(rolldown@1.0.0-beta.57)(rollup@4.53.3)(typescript@5.9.3)(vitest@4.0.16(@types/node@24.10.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))
       '@ts-macro/language-plugin':
-        specifier: ^0.3.6
-        version: 0.3.6(rollup@4.53.3)
+        specifier: ^0.3.7
+        version: 0.3.7(rollup@4.53.3)
       '@ts-macro/tsc':
-        specifier: ^0.3.6
-        version: 0.3.6(rollup@4.53.3)
+        specifier: ^0.3.7
+        version: 0.3.7(rollup@4.53.3)
       '@types/espree':
         specifier: ^10.1.0
         version: 10.1.0
@@ -64,8 +64,8 @@ importers:
         specifier: ^9.39.2
         version: 9.39.2(jiti@2.6.1)
       tsdown:
-        specifier: ^0.18.3
-        version: 0.18.3(@ts-macro/tsc@0.3.6(rollup@4.53.3))(oxc-resolver@11.16.0)(synckit@0.11.11)(typescript@5.9.3)
+        specifier: ^0.18.4
+        version: 0.18.4(@ts-macro/tsc@0.3.7(rollup@4.53.3))(oxc-resolver@11.16.0)(synckit@0.11.11)(typescript@5.9.3)
       tsx:
         specifier: ^4.21.0
         version: 4.21.0
@@ -996,11 +996,11 @@ packages:
       typescript:
         optional: true
 
-  '@ts-macro/language-plugin@0.3.6':
-    resolution: {integrity: sha512-mI9KQ6OSpP+PmPV0sAlKp6Nd0s9G8i7VEm0rsQk2fiEC1fozAmYqO5P6/axj47kJKAPm1V3QsgqGrz36OpJP+g==}
+  '@ts-macro/language-plugin@0.3.7':
+    resolution: {integrity: sha512-fZBCGoYmM3fm1EE7v2FQ0Ovab1sOqgDaz48Wypw4KkO3yG8pEtYtpa24PxNY43ydCf0yMNwShufdyV5qt5sRmg==}
 
-  '@ts-macro/tsc@0.3.6':
-    resolution: {integrity: sha512-ev8qBPLhTc7wH7s+6igCuTCUuLwjzaYB7b7g6Zt+SsXne1tf+2elf6OfrYFzaMixL0qdcH85Mp7PxsfVnjEgrw==}
+  '@ts-macro/tsc@0.3.7':
+    resolution: {integrity: sha512-Rt2Ra5Z4+OtymCZ5sWNsBwlG6WpgC5Wm5MC6sFoOYxPFlIM4v4BqwHzCb1sX29QpbdCLiWQITZ89O9qTwZBwzQ==}
     hasBin: true
 
   '@tybys/wasm-util@0.10.1':
@@ -2275,11 +2275,11 @@ packages:
     peerDependencies:
       typescript: '>=4.0.0'
 
-  ts-macro@0.3.6:
-    resolution: {integrity: sha512-0buxBZweJjozSPA+77X7ntznNouLOtGDJA8nQJgoAQBduKAltF3YLABLbDLp5N7KsDA0ssldX+L/WwI1SloJmg==}
+  ts-macro@0.3.7:
+    resolution: {integrity: sha512-5BinbTKn5WXRslotv5/VWTn3catfK0thWoB4BZI5VNEdxMu6r9AUPFalut4wLEK3nGvxhywA9aAdZnJ+Fnug9A==}
 
-  tsdown@0.18.3:
-    resolution: {integrity: sha512-OVFzktKDTglFAUh/WO8WamBUbZoBlJ9m7NgZZrVyIKe32BfXBeRZ+soFFpuOGVP8g8OU4tOLOpTyPTELWvcTFw==}
+  tsdown@0.18.4:
+    resolution: {integrity: sha512-J/tRS6hsZTkvqmt4+xdELUCkQYDuUCXgBv0fw3ImV09WPGbEKfsPD65E+WUjSu3E7Z6tji9XZ1iWs8rbGqB/ZA==}
     engines: {node: '>=20.19.0'}
     hasBin: true
     peerDependencies:
@@ -3131,33 +3131,33 @@ snapshots:
     dependencies:
       '@prettier/plugin-oxc': 0.1.3
 
-  '@sxzz/test-utils@0.5.15(@ts-macro/language-plugin@0.3.6(rollup@4.53.3))(@volar/typescript@2.4.27)(esbuild@0.27.1)(rolldown@1.0.0-beta.57)(rollup@4.53.3)(typescript@5.9.3)(vitest@4.0.16(@types/node@24.10.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))':
+  '@sxzz/test-utils@0.5.15(@ts-macro/language-plugin@0.3.7(rollup@4.53.3))(@volar/typescript@2.4.27)(esbuild@0.27.1)(rolldown@1.0.0-beta.57)(rollup@4.53.3)(typescript@5.9.3)(vitest@4.0.16(@types/node@24.10.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:
       tinyglobby: 0.2.15
       unplugin-utils: 0.3.1
       vitest: 4.0.16(@types/node@24.10.4)(jiti@2.6.1)(tsx@4.21.0)(yaml@2.8.2)
     optionalDependencies:
-      '@ts-macro/language-plugin': 0.3.6(rollup@4.53.3)
+      '@ts-macro/language-plugin': 0.3.7(rollup@4.53.3)
       '@volar/typescript': 2.4.27
       esbuild: 0.27.1
       rolldown: 1.0.0-beta.57
       rollup: 4.53.3
       typescript: 5.9.3
 
-  '@ts-macro/language-plugin@0.3.6(rollup@4.53.3)':
+  '@ts-macro/language-plugin@0.3.7(rollup@4.53.3)':
     dependencies:
       '@volar/language-core': 2.4.27
       '@volar/typescript': 2.4.27
       jiti: 2.6.1
       rollup-utils: 0.0.5(rollup@4.53.3)
-      ts-macro: 0.3.6
+      ts-macro: 0.3.7
       vscode-uri: 3.1.0
     transitivePeerDependencies:
       - rollup
 
-  '@ts-macro/tsc@0.3.6(rollup@4.53.3)':
+  '@ts-macro/tsc@0.3.7(rollup@4.53.3)':
     dependencies:
-      '@ts-macro/language-plugin': 0.3.6(rollup@4.53.3)
+      '@ts-macro/language-plugin': 0.3.7(rollup@4.53.3)
       '@volar/typescript': 2.4.27
     transitivePeerDependencies:
       - rollup
@@ -4597,7 +4597,7 @@ snapshots:
 
   resolve-pkg-maps@1.0.0: {}
 
-  rolldown-plugin-dts@0.20.0(@ts-macro/tsc@0.3.6(rollup@4.53.3))(oxc-resolver@11.16.0)(rolldown@1.0.0-beta.57)(typescript@5.9.3):
+  rolldown-plugin-dts@0.20.0(@ts-macro/tsc@0.3.7(rollup@4.53.3))(oxc-resolver@11.16.0)(rolldown@1.0.0-beta.57)(typescript@5.9.3):
     dependencies:
       '@babel/generator': 7.28.5
       '@babel/parser': 7.28.5
@@ -4609,7 +4609,7 @@ snapshots:
       obug: 2.1.1
       rolldown: 1.0.0-beta.57
     optionalDependencies:
-      '@ts-macro/tsc': 0.3.6(rollup@4.53.3)
+      '@ts-macro/tsc': 0.3.7(rollup@4.53.3)
       typescript: 5.9.3
     transitivePeerDependencies:
       - oxc-resolver
@@ -4744,11 +4744,11 @@ snapshots:
       picomatch: 4.0.3
       typescript: 5.9.3
 
-  ts-macro@0.3.6:
+  ts-macro@0.3.7:
     dependencies:
       muggle-string: 0.4.1
 
-  tsdown@0.18.3(@ts-macro/tsc@0.3.6(rollup@4.53.3))(oxc-resolver@11.16.0)(synckit@0.11.11)(typescript@5.9.3):
+  tsdown@0.18.4(@ts-macro/tsc@0.3.7(rollup@4.53.3))(oxc-resolver@11.16.0)(synckit@0.11.11)(typescript@5.9.3):
     dependencies:
       ansis: 4.2.0
       cac: 6.7.14
@@ -4759,7 +4759,7 @@ snapshots:
       obug: 2.1.1
       picomatch: 4.0.3
       rolldown: 1.0.0-beta.57
-      rolldown-plugin-dts: 0.20.0(@ts-macro/tsc@0.3.6(rollup@4.53.3))(oxc-resolver@11.16.0)(rolldown@1.0.0-beta.57)(typescript@5.9.3)
+      rolldown-plugin-dts: 0.20.0(@ts-macro/tsc@0.3.7(rollup@4.53.3))(oxc-resolver@11.16.0)(rolldown@1.0.0-beta.57)(typescript@5.9.3)
       semver: 7.7.3
       tinyexec: 1.0.2
       tinyglobby: 0.2.15
