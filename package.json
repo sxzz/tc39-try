@@ -2,7 +2,7 @@
   "name": "tc39-try",
   "type": "module",
   "version": "0.4.3",
-  "packageManager": "pnpm@10.27.0",
+  "packageManager": "pnpm@10.28.0",
   "description": "Enable support for try expressions in JavaScript tools",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
@@ -68,16 +68,16 @@
     "@ts-macro/language-plugin": "^0.3.7",
     "@ts-macro/tsc": "^0.3.7",
     "@types/espree": "^10.1.0",
-    "@types/node": "^24.10.4",
+    "@types/node": "^24.10.7",
     "@volar/typescript": "^2.4.27",
     "acorn": "^8.15.0",
     "bumpp": "^10.3.2",
     "eslint": "^9.39.2",
-    "tsdown": "^0.18.4",
+    "tsdown": "^0.19.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "unplugin-oxc": "^0.5.7",
-    "vite": "^7.3.0",
+    "vite": "^7.3.1",
     "vitest": "^4.0.16"
   }
 }
