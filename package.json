@@ -72,7 +72,7 @@
     "@volar/typescript": "^2.4.28",
     "acorn": "^8.15.0",
     "bumpp": "^10.4.0",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
     "tsdown": "^0.20.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
