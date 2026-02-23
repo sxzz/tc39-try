@@ -67,7 +67,7 @@
     "@sxzz/test-utils": "^0.5.15",
     "@ts-macro/language-plugin": "^0.3.7",
     "@ts-macro/tsc": "^0.3.7",
-    "@types/espree": "^10.1.0",
+    "@types/espree": "^11.1.0",
     "@types/node": "^24.10.13",
     "@volar/typescript": "^2.4.28",
     "acorn": "^8.16.0",
