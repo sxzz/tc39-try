@@ -46,8 +46,8 @@ importers:
         specifier: ^0.3.7
         version: 0.3.7(rollup@4.53.3)
       '@types/espree':
-        specifier: ^10.1.0
-        version: 10.1.0
+        specifier: ^11.1.0
+        version: 11.1.0
       '@types/node':
         specifier: ^24.10.13
         version: 24.10.13
@@ -1102,8 +1102,9 @@ packages:
   '@types/deep-eql@4.0.2':
     resolution: {integrity: sha512-c9h9dVVMigMPc4bwTvC5dxqtqJZwQPePsWjPlpSOnojbor6pGqdk541lfA7AqFQr5pB1BRdq0juY9db81BwyFw==}
 
-  '@types/espree@10.1.0':
-    resolution: {integrity: sha512-uPQZdoUWWMuO6WS8/dwX1stZH/vOBa/wAniGnYEFI0IuU9RmLx6PLmo+VGfNOlbRc5I7hBsQc8H0zcdVI37kxg==}
+  '@types/espree@11.1.0':
+    resolution: {integrity: sha512-yz3MRjG3qqvfkMR+IkPXN+dHVhSZyuCui2RGEm+mY0gXYlIuYS+AEW2J2UKPuvs0Vmh8xUxhtQ3yrln0/Y8ZLw==}
+    deprecated: This is a stub types definition. espree provides its own type definitions, so you do not need this installed.
 
   '@types/esrecurse@4.3.1':
     resolution: {integrity: sha512-xJBAbDifo5hpffDBuHl0Y8ywswbiAp/Wi7Y/GtAgSlZyIABppyurxVueOPE8LUQOxdlgi6Zqce7uoEpqNTeiUw==}
@@ -3219,10 +3220,9 @@ snapshots:
 
   '@types/deep-eql@4.0.2': {}
 
-  '@types/espree@10.1.0':
+  '@types/espree@11.1.0':
     dependencies:
-      acorn: 8.16.0
-      eslint-visitor-keys: 4.2.1
+      espree: 11.1.0
 
   '@types/esrecurse@4.3.1': {}
 
