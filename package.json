@@ -2,7 +2,7 @@
   "name": "tc39-try",
   "type": "module",
   "version": "0.4.3",
-  "packageManager": "pnpm@10.33.0",
+  "packageManager": "pnpm@10.33.2",
   "description": "Enable support for try expressions in JavaScript tools",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
