@@ -25,9 +25,6 @@
     "./volar": "./dist/volar.js",
     "./package.json": "./package.json"
   },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
   "files": [
     "dist"
   ],
@@ -35,7 +32,7 @@
     "access": "public"
   },
   "engines": {
-    "node": ">=20.19.0"
+    "node": "^22.18.0 || >=24.0.0"
   },
   "scripts": {
     "lint": "eslint --cache .",
