@@ -1,8 +1,5 @@
-import { defineConfig } from 'tsdown'
+import { lib } from 'tsdown-preset-sxzz'
 
-export default defineConfig({
-  entry: 'src/*.ts',
-  platform: 'neutral',
-  inlineOnly: [],
-  exports: true,
+export default lib({
+  entry: 'shallow',
 })
