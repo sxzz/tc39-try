@@ -1,6 +1,6 @@
 import path from 'node:path'
 import { rollupBuild, testFixtures } from '@sxzz/test-utils'
-import UnpluginOxc from 'unplugin-oxc/vite'
+import UnpluginOxc from 'unplugin-oxc/rollup'
 import { describe } from 'vitest'
 import unplugin from '../src/unplugin'
 
