@@ -51,7 +51,7 @@
     "typescript": "^5.8.3 || ^6.0.0"
   },
   "dependencies": {
-    "magic-string-ast": "^1.0.3",
+    "magic-string-ast": "^2.0.0",
     "try": "^1.0.3",
     "ts-macro": "^0.3.7",
     "unplugin": "^3.0.0",
