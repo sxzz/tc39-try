@@ -2,7 +2,7 @@
   "name": "tc39-try",
   "type": "module",
   "version": "0.5.0",
-  "packageManager": "pnpm@11.5.2",
+  "packageManager": "pnpm@11.6.0",
   "description": "Enable support for try expressions in JavaScript tools",
   "author": "Kevin Deng <sxzz@sxzz.moe>",
   "license": "MIT",
@@ -51,31 +51,31 @@
     "typescript": "^5.8.3 || ^6.0.0"
   },
   "dependencies": {
-    "magic-string-ast": "^1.0.3",
+    "magic-string-ast": "^2.0.0",
     "try": "^1.0.3",
     "ts-macro": "^0.3.7",
     "unplugin": "^3.0.0",
     "untsx": "^0.1.3"
   },
   "devDependencies": {
-    "@babel/types": "^7.29.0",
-    "@sxzz/eslint-config": "^8.0.0",
+    "@babel/types": "^7.29.7",
+    "@sxzz/eslint-config": "^8.1.0",
     "@sxzz/prettier-config": "^2.3.1",
     "@sxzz/test-utils": "^0.5.18",
     "@ts-macro/language-plugin": "^0.3.7",
     "@ts-macro/tsc": "^0.3.7",
-    "@types/node": "^25.6.0",
+    "@types/node": "^25.9.3",
     "@volar/typescript": "^2.4.28",
     "acorn": "^8.16.0",
-    "bumpp": "^11.0.1",
-    "eslint": "^10.3.0",
-    "rollup": "^4.60.2",
-    "tsdown": "^0.22.0",
+    "bumpp": "^11.1.0",
+    "eslint": "^10.4.1",
+    "rollup": "^4.61.1",
+    "tsdown": "^0.22.2",
     "tsdown-preset-sxzz": "^0.6.0",
-    "tsx": "^4.21.0",
+    "tsx": "^4.22.4",
     "typescript": "^6.0.3",
     "unplugin-oxc": "^0.6.1",
-    "vite": "^8.0.10",
-    "vitest": "^4.1.5"
+    "vite": "^8.0.16",
+    "vitest": "^4.1.8"
   }
 }
