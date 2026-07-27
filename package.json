@@ -67,7 +67,7 @@
     "@types/node": "^25.9.3",
     "@volar/typescript": "^2.4.28",
     "acorn": "^8.16.0",
-    "bumpp": "^11.1.0",
+    "bumpp": "^12.0.0",
     "eslint": "^10.4.1",
     "rollup": "^4.61.1",
     "tsdown": "^0.22.2",
