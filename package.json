@@ -15,6 +15,7 @@
   "bugs": {
     "url": "https://github.com/sxzz/tc39-try/issues"
   },
+  "sideEffects": false,
   "exports": {
     ".": "./dist/index.js",
     "./acorn": "./dist/acorn.js",
