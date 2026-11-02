@@ -65,7 +65,7 @@
     "@sxzz/test-utils": "^0.5.18",
     "@ts-macro/language-plugin": "^0.3.7",
     "@ts-macro/tsc": "^0.3.7",
-    "@types/node": "^25.9.3",
+    "@types/node": "^26.0.0",
     "@volar/typescript": "^2.4.28",
     "acorn": "^8.16.0",
     "bumpp": "^12.0.0",
